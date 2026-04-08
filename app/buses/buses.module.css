@@ -1,0 +1,82 @@
+/* Container */
+.buses-container {
+  padding: 50px 100px;
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.buses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.buses-header h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* Add bus button */
+.add-bus-btn {
+  padding: 8px 15px;
+  background-color: #22c55e; /* green */
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.add-bus-btn:hover {
+  background-color: #16a34a;
+}
+
+/* Table */
+.buses-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.buses-table th,
+.buses-table td {
+  border: 1px solid #ccc;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.buses-table th {
+  background-color: #f3f4f6;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn {
+  padding: 5px 10px;
+  background-color: #3b82f6; /* blue */
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.edit-btn:hover {
+  background-color: #2563eb;
+}
+
+.delete-btn {
+  padding: 5px 10px;
+  background-color: #ef4444; /* red */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #b91c1c;
+}

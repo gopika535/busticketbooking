@@ -14,7 +14,6 @@ export default function RootLayout({
           <ul className="nav-links">
             <li><Link href="/">Home</Link></li>
             <li><Link href="/about">About Us</Link></li>
-            <li><Link href="/tickets">Tickets</Link></li>
             <li><Link href="/login">Login</Link></li>
           </ul>
         </nav>

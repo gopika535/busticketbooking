@@ -1,0 +1,29 @@
+{
+  "buses": [
+    {
+      "id": "1",
+      "name": "Express Travels",
+      "from": "Chennai",
+      "to": "Bangalore",
+      "time": "10:00 AM",
+      "price": 500
+    },
+    {
+      "id": "2",
+      "name": "Super Fast",
+      "from": "Chennai",
+      "to": "Hyderabad",
+      "time": "02:00 PM",
+      "price": 800
+    },
+    {
+      "name": "Ayappa Travels",
+      "from": "Bangalore",
+      "to": "Salem",
+      "time": "11:00 P.M",
+      "price": 1500,
+      "id": "jP876ks5Reo"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

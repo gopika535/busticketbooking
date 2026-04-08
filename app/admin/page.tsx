@@ -1,61 +1,52 @@
-/*"use client";
 
-import { useState } from "react";
+"use client";
 
 export default function Admin() {
-  const [buses, setBuses] = useState<string[]>([]);
-  const [busName, setBusName] = useState("");
-
-  const addBus = () => {
-    if (busName.trim() === "") return;
-    setBuses([...buses, busName]);
-    setBusName("");
-  };
-
-  const deleteBus = (index: number) => {
-    setBuses(buses.filter((_, i) => i !== index));
-  };
-;
   return (
     <div style={styles.container}>
-      <h1>Admin Dashboard</h1>
+      <div style={styles.card}>
+        <h1 style={styles.heading}>Admin Dashboard</h1>
 
-    
-      <div>
-        <input
-          placeholder="Enter Bus Name"
-          value={busName}
-          onChange={(e) => setBusName(e.target.value)}
-          style={styles.input}
-        />
-        <button onClick={addBus} style={styles.button}>
-          Add Bus
-        </button>
+        <p style={styles.text}>Manage buses and bookings here.</p>
+        <p style={styles.text}>View buses</p>
+       
+        <a href="/buses" style={styles.link}>
+          Go to Buses
+        </a>
       </div>
-
-    
-      <ul>
-        {buses.map((bus, index) => (
-          <li key={index}>
-            {bus}
-            <button onClick={() => deleteBus(index)} style={styles.delete}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}*/
-"use client";
-export default function Admin() {
-  return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      <p>Manage buses and bookings here.</p>
-      <p>view buses</p>
-      <p>add buses</p>
-      <p>delete buses</p>
     </div>
   );
 }
+const styles = {
+  container: {
+    padding: "40px",
+    textAlign: "center" as const,
+    minHeight: "80vh",
+    backgroundColor: "#f4f6f9",
+  },
+  card: {
+    backgroundColor: "white",
+    padding: "30px",
+    borderRadius: "10px",
+    width: "400px",
+    margin: "auto",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+  },
+  heading: {
+    color: "#0a3d62",
+    marginBottom: "10px",
+  },
+  text: {
+    color: "#333",
+    margin: "8px 0",
+  },
+  link: {
+    display: "inline-block",
+    marginTop: "20px",
+    padding: "10px 15px",
+    backgroundColor: "#0a3d62",
+    color: "white",
+    textDecoration: "none",
+    borderRadius: "5px",
+  },
+};

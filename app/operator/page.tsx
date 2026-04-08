@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export default function Admin() {
+export default function Operator() {
   const [buses, setBuses] = useState<any[]>([]);
   const [name, setName] = useState("");
   const [route, setRoute] = useState("");
@@ -36,7 +36,7 @@ export default function Admin() {
 
   return (
     <div>
-      <h1>Admin Dashboard</h1>
+      <h1>Operator Dashboard</h1>
 
       {/* FORM */}
       <input

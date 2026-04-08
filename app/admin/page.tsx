@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 
 import { useState } from "react";
 
@@ -44,6 +44,18 @@ export default function Admin() {
           </li>
         ))}
       </ul>
+    </div>
+  );
+}*/
+"use client";
+export default function Admin() {
+  return (
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>Manage buses and bookings here.</p>
+      <p>view buses</p>
+      <p>add buses</p>
+      <p>delete buses</p>
     </div>
   );
 }

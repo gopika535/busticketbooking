@@ -8,7 +8,6 @@ export default function Home() {
         <p>Search, select, and reserve your seats in minutes.</p>
 
         
-        
       </main>
   </div>
   );

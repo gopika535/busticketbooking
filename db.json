@@ -1,4 +1,4 @@
-{
+/*{
   "buses": [
     {
       "id": "1",
@@ -24,6 +24,50 @@
       "price": 1500,
       "id": "jP876ks5Reo"
     }
+  ]
+  
+}*/
+
+{
+  "buses": [
+    {
+      "id": "1",
+      "name": "Express Travels",
+      "from": "Chennai",
+      "to": "Bangalore",
+      "time": "10:00 AM",
+      "price": 500
+    },
+    {
+      "id": "2",
+      "name": "Super Fast",
+      "from": "Chennai",
+      "to": "Hyderabad",
+      "time": "02:00 PM",
+      "price": 800
+    },
+    {
+      "id": "jP876ks5Reo",
+      "name": "Ayappa Travels",
+      "from": "Bangalore",
+      "to": "Salem",
+      "time": "11:00 PM",
+      "price": 1500
+    }
   ],
-  "$schema": "./node_modules/json-server/schema.json"
+
+  "users": [
+    {
+      "id": "101",
+      "name": "Gopika",
+      "email": "gopika@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "102",
+      "name": "Rahul",
+      "email": "rahul@gmail.com",
+      "password": "abcdef"
+    }
+  ]
 }

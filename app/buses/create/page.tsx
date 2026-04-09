@@ -12,6 +12,7 @@ export default function AddBusPage() {
   const [to, setTo] = useState("");
   const [time, setTime] = useState("");
   const [price, setPrice] = useState("");
+  
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const router = useRouter();

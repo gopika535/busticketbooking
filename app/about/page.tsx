@@ -1,10 +1,12 @@
 
+"use client";
+
 export default function About() {
   return (
     <div style={styles.container}>
       
-      
       <h1 style={styles.heading}>About Us</h1>
+
       <p style={styles.text}>
         The Bus Ticket Booking System is designed to simplify and enhance the
         process of booking bus tickets. It provides users with an easy and
@@ -13,16 +15,55 @@ export default function About() {
       </p>
 
       <h2 style={styles.subheading}>Features</h2>
-      <ul style={styles.list}>
-        <li>Search buses based on source, destination, and date</li>
-        <li>View routes, schedules, and bus operator details</li>
-        <li>Real-time seat availability tracking</li>
-        <li>Easy seat selection and booking</li>
-        <li>Multiple payment options</li>
-        <li>User roles: Admin, Operator, Customer, Guest</li>
-      </ul>
 
-    
+      
+      <div style={styles.featuresContainer}>
+
+        <div style={styles.card}>
+          <div>
+            <h3 style={styles.cardTitle}>Search</h3>
+            <p style={styles.cardText}>Find buses by source, destination and date</p>
+          </div>
+        </div>
+
+        <div style={styles.card}>
+          <div>
+            <h3 style={styles.cardTitle}>Routes</h3>
+            <p style={styles.cardText}>View routes, schedules and operators</p>
+          </div>
+        </div>
+
+        <div style={styles.card}>
+          <div>
+            <h3 style={styles.cardTitle}>Availability</h3>
+            <p style={styles.cardText}>Real-time seat tracking system</p>
+          </div>
+        </div>
+
+        <div style={styles.card}>
+          <div>
+            <h3 style={styles.cardTitle}>Booking</h3>
+            <p style={styles.cardText}>Easy seat selection & booking</p>
+          </div>
+        </div>
+
+        <div style={styles.card}>
+          <div>
+            <h3 style={styles.cardTitle}>Payment</h3>
+            <p style={styles.cardText}>Supports multiple payment methods</p>
+          </div>
+        </div>
+
+        <div style={styles.card}>
+          {/* <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style={styles.icon}/> */}
+          <div>
+            <h3 style={styles.cardTitle}>Users</h3>
+            <p style={styles.cardText}>Admin, Operator, Customer roles</p>
+          </div>
+        </div>
+
+      </div>
+
       <h2 style={styles.subheading}>Our Goal</h2>
       <p style={styles.text}>
         Our goal is to provide a reliable, fast, and user-friendly platform
@@ -34,32 +75,63 @@ export default function About() {
 }
 const styles = {
   container: {
-    maxWidth: "900px",
-    margin: "60px auto",
+    maxWidth: "1000px",
+    margin: "50px auto",
     padding: "20px",
-    fontFamily: "Georgia, serif",
-    lineHeight: "1.8",
-    color: "#222",
+    fontFamily: "Arial, sans-serif",
   },
+
   heading: {
-    textAlign: "center" as const,
+    textAlign: "center",
     fontSize: "32px",
     marginBottom: "20px",
-    borderBottom: "2px solid #0a3d62",
-    paddingBottom: "10px",
   },
+
   subheading: {
     marginTop: "30px",
     fontSize: "22px",
-    color: "#0a3d62",
   },
+
   text: {
     fontSize: "16px",
-    marginBottom: "15px",
-    textAlign: "justify" as const,
+    marginBottom: "20px",
+    textAlign: "justify",
   },
-  list: {
-    marginTop: "10px",
-    paddingLeft: "20px",
+
+ 
+  featuresContainer: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: "20px",
+    marginTop: "20px",
+  },
+
+  
+  card: {
+    display: "flex",
+    gap: "15px",
+    alignItems: "center",
+    background: "#1e2a38",
+    color: "#fff",
+    padding: "20px",
+    borderRadius: "12px",
+    boxShadow: "0 6px 15px rgba(0,0,0,0.3)",
+    transition: "0.3s",
+  },
+
+  icon: {
+    width: "40px",
+    height: "40px",
+  },
+
+  cardTitle: {
+    margin: 0,
+    fontSize: "16px",
+  },
+
+  cardText: {
+    margin: 0,
+    fontSize: "13px",
+    opacity: 0.8,
   },
 };

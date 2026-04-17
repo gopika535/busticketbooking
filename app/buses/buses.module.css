@@ -1,10 +1,9 @@
 /* Container */
-.buses-container {
+/*.buses-container {
   padding: 50px 100px;
   font-family: Arial, sans-serif;
 }
 
-/* Header */
 .buses-header {
   display: flex;
   justify-content: space-between;
@@ -17,10 +16,9 @@
   font-weight: bold;
 }
 
-/* Add bus button */
 .add-bus-btn {
   padding: 8px 15px;
-  background-color: #22c55e; /* green */
+  background-color: #22c55e;
   color: white;
   border-radius: 6px;
   text-decoration: none;
@@ -31,7 +29,6 @@
   background-color: #16a34a;
 }
 
-/* Table */
 .buses-table {
   width: 100%;
   border-collapse: collapse;
@@ -48,7 +45,6 @@
   background-color: #f3f4f6;
 }
 
-/* Actions */
 .actions {
   display: flex;
   gap: 10px;
@@ -56,7 +52,7 @@
 
 .edit-btn {
   padding: 5px 10px;
-  background-color: #3b82f6; /* blue */
+  background-color: #3b82f6;
   color: white;
   border-radius: 5px;
   text-decoration: none;
@@ -69,7 +65,7 @@
 
 .delete-btn {
   padding: 5px 10px;
-  background-color: #ef4444; /* red */
+  background-color: #ef4444;
   color: white;
   border: none;
   border-radius: 5px;
@@ -79,4 +75,191 @@
 
 .delete-btn:hover {
   background-color: #b91c1c;
+}*/
+
+/*.report-container {
+  margin-top: 40px;
+  padding: 20px;
+  background: #f5f7fa;
+  border-radius: 10px;
+}
+
+.report-btn {
+  padding: 10px 20px;
+  background: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.report-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 200px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}*/
+
+/* ===== PAGE BACKGROUND ===== */
+.buses-container {
+  padding: 30px;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #fff;
+}
+
+/* ===== HEADER ===== */
+.buses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.buses-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.add-bus-btn {
+  background: #3b82f6;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+}
+
+.add-bus-btn:hover {
+  background: #2563eb;
+}
+
+/* ===== TABLE ===== */
+.buses-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.buses-table th {
+  background: #334155;
+  padding: 14px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.buses-table td {
+  padding: 14px;
+  border-bottom: 1px solid #334155;
+}
+
+.buses-table tr:hover {
+  background: #273449;
+}
+
+/* ===== DELETE BUTTON ===== */
+.delete-btn {
+  background: #ef4444;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* ===== REPORT SECTION ===== */
+.report-container {
+  margin-top: 30px;
+}
+
+.report-container h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+/* ===== CARD GRID ===== */
+.report-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ===== CARD STYLE (MATCH IMAGE) ===== */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  box-shadow: 
+    5px 5px 15px rgba(0, 0, 0, 0.6),
+    -5px -5px 15px rgba(255, 255, 255, 0.05);
+  transition: 0.3s;
+}
+
+/* Hover effect */
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+/* ===== ICON STYLE ===== */
+.card::before {
+  content: "📊";
+  font-size: 28px;
+  background: #334155;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Different icons */
+.card:nth-child(2)::before {
+  content: "💰";
+}
+
+.card:nth-child(3)::before {
+  content: "🛣️";
+}
+
+/* ===== TEXT ===== */
+.card h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #cbd5f5;
+}
+
+.card p {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .report-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .buses-header {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

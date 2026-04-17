@@ -1,58 +1,360 @@
-"use client";
-
+/*"use client";
 import { useState, useEffect } from "react";
 
 export default function Operator() {
   const [buses, setBuses] = useState<any[]>([]);
   const [name, setName] = useState("");
   const [route, setRoute] = useState("");
-  const [time, setTime] = useState("");
-  const [fare, setFare] = useState("");
   const [totalSeats, setTotalSeats] = useState("");
   const [availableSeats, setAvailableSeats] = useState("");
-
-  const dummyBuses = [
-    {
-      name: "Express A",
-      route: "Chennai → Madurai",
-      time: "10:00 AM",
-      fare: 500,
-      totalSeats: 40,
-      availableSeats: 25,
-    },
-    {
-      name: "Super Deluxe",
-      route: "Chennai → Coimbatore",
-      time: "2:00 PM",
-      fare: 700,
-      totalSeats: 45,
-      availableSeats: 10,
-    },
-    {
-      name: "Night Rider",
-      route: "Chennai → Trichy",
-      time: "9:00 PM",
-      fare: 600,
-      totalSeats: 35,
-      availableSeats: 0,
-    },
-    {
-      name: "Express Rider",
-      route: "Chennai → Chidambaram",
-      time: "10:30 PM",
-      fare: 1200,
-      totalSeats: 35,
-      availableSeats: 20,
-    },
-  ];
+  const [selectedBus, setSelectedBus] = useState<any>(null);
+  const [editIndex, setEditIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const data = localStorage.getItem("buses");
-    if (data) {
-      setBuses(JSON.parse(data));
-    } else {
-      setBuses(dummyBuses);
+    if (data) setBuses(JSON.parse(data));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("buses", JSON.stringify(buses));
+  }, [buses]);
+
+  
+  const addBus = () => {
+    if (!name || !route || !totalSeats || !availableSeats) {
+      alert("Fill all fields");
+      return;
     }
+
+    if (Number(availableSeats) > Number(totalSeats)) {
+      alert("Available seats cannot exceed total seats ❌");
+      return;
+    }
+
+    const newBus = {
+      name,
+      route,
+      totalSeats: Number(totalSeats),
+      availableSeats: Number(availableSeats),
+    };
+
+    if (editIndex !== null) {
+      const updated = [...buses];
+      updated[editIndex] = newBus;
+      setBuses(updated);
+      setEditIndex(null);
+      alert("Bus updated successfully ✅");
+    } else {
+      setBuses([...buses, newBus]);
+      alert("Bus added successfully ✅");
+    }
+
+    setName("");
+    setRoute("");
+    setTotalSeats("");
+    setAvailableSeats("");
+  };
+
+  const deleteBus = (index: number) => {
+    setBuses(buses.filter((_, i) => i !== index));
+    alert("Bus cancelled ❌");
+  };
+
+  return (
+    <div style={styles.container}>
+      <h1 style={styles.heading}>Operator Dashboard</h1>
+
+      
+      <div style={styles.form}>
+        <input
+          style={styles.input}
+          placeholder="Bus Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <input
+          style={styles.input}
+          placeholder="Route"
+          value={route}
+          onChange={(e) => setRoute(e.target.value)}
+        />
+
+        <input
+          style={styles.input}
+          placeholder="Total Seats"
+          value={totalSeats}
+          onChange={(e) => setTotalSeats(e.target.value)}
+        />
+
+        <input
+          style={styles.input}
+          placeholder="Available Seats"
+          value={availableSeats}
+          onChange={(e) => setAvailableSeats(e.target.value)}
+        />
+
+        <button style={styles.addBtn} onClick={addBus}>
+          {editIndex !== null ? "Update Bus" : "Add Bus"}
+        </button>
+      </div>
+
+      
+      <table style={styles.table}>
+        <thead>
+          <tr>
+            <th style={styles.th}>Name</th>
+            <th style={styles.th}>Route</th>
+            <th style={styles.th}>Total</th>
+            <th style={styles.th}>Available</th>
+            <th style={styles.th}>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {buses.map((bus, index) => (
+            <tr
+              key={index}
+              style={{
+                backgroundColor:
+                  editIndex === index ? "#334155" : "transparent",
+              }}
+            >
+              <td style={styles.td}>{bus.name}</td>
+              <td style={styles.td}>{bus.route}</td>
+              <td style={styles.td}>{bus.totalSeats}</td>
+
+              <td
+                style={{
+                  ...styles.td,
+                  color:
+                    bus.availableSeats === 0 ? "#ff4d4f" : "#2ecc71",
+                  fontWeight: "bold",
+                }}
+              >
+                {bus.availableSeats === 0
+                  ? "FULL"
+                  : bus.availableSeats}
+              </td>
+
+              <td style={styles.td}>
+               
+                <button
+                  style={styles.editBtn}
+                  onClick={() => {
+                    setName(bus.name);
+                    setRoute(bus.route);
+                    setTotalSeats(bus.totalSeats.toString());
+                    setAvailableSeats(bus.availableSeats.toString());
+                    setEditIndex(index);
+                  }}
+                >
+                  Edit
+                </button>
+
+                
+                <button
+                  style={styles.deleteBtn}
+                  onClick={() => deleteBus(index)}
+                >
+                  Cancel
+                </button>
+
+                
+                <button
+                  style={styles.viewBtn}
+                  onClick={() => setSelectedBus(bus)}
+                >
+                  View
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      
+      {selectedBus && (
+        <div style={styles.seatSection}>
+          <h2 style={styles.subheading}>
+            Seat Layout - {selectedBus.name}
+          </h2>
+
+          <div style={styles.busContainer}>
+            {Array.from({ length: 5 }).map((_, rowIndex) => (
+              <div key={rowIndex} style={styles.row}>
+                <div style={styles.side}>
+                  {[0, 1].map((seat) => (
+                    <div key={seat} style={styles.seat}>
+                      {rowIndex * 5 + seat + 1}
+                    </div>
+                  ))}
+                </div>
+
+                <div style={styles.aisle}></div>
+
+                <div style={styles.side}>
+                  {[2, 3, 4].map((seat) => (
+                    <div key={seat} style={styles.seat}>
+                      {rowIndex * 5 + seat + 1}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+
+const styles = {
+  container: {
+    padding: "20px",
+    minHeight: "100vh",
+    fontFamily: "Poppins, sans-serif",
+    background: "linear-gradient(135deg, #0f172a, #1e293b)",
+    color: "white",
+  },
+
+  heading: {
+    textAlign: "center" as const,
+    marginBottom: "20px",
+  },
+
+  subheading: {
+    textAlign: "center" as const,
+  },
+
+  form: {
+    display: "flex",
+    gap: "10px",
+    justifyContent: "center",
+    marginBottom: "20px",
+    flexWrap: "wrap" as const,
+  },
+
+  input: {
+    padding: "10px",
+    borderRadius: "6px",
+    border: "1px solid #ccc",
+  },
+
+  addBtn: {
+    background: "#3b82f6",
+    color: "white",
+    padding: "10px 15px",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+  },
+
+  table: {
+    width: "100%",
+    borderCollapse: "collapse" as const,
+    background: "#1e293b",
+    borderRadius: "10px",
+    overflow: "hidden",
+  },
+
+  th: {
+    background: "#334155",
+    color: "#fff",
+    padding: "12px",
+  },
+
+  td: {
+    padding: "12px",
+    textAlign: "center" as const,
+    borderBottom: "1px solid #334155",
+    color: "#e2e8f0",
+  },
+
+  editBtn: {
+    background: "#f39c12",
+    color: "white",
+    padding: "6px 10px",
+    border: "none",
+    borderRadius: "5px",
+    marginRight: "5px",
+    cursor: "pointer",
+  },
+
+  deleteBtn: {
+    background: "#e74c3c",
+    color: "white",
+    padding: "6px 10px",
+    border: "none",
+    borderRadius: "5px",
+    marginRight: "5px",
+    cursor: "pointer",
+  },
+
+  viewBtn: {
+    background: "#8e44ad",
+    color: "white",
+    padding: "6px 10px",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+  },
+
+  seatSection: {
+    marginTop: "30px",
+  },
+
+  busContainer: {
+    display: "flex",
+    flexDirection: "column" as const,
+    alignItems: "center",
+    gap: "15px",
+  },
+
+  row: {
+    display: "flex",
+    alignItems: "center",
+  },
+
+  side: {
+    display: "flex",
+    gap: "10px",
+  },
+
+  aisle: {
+    width: "40px",
+  },
+
+  seat: {
+    width: "50px",
+    height: "50px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "8px",
+    background: "#2ecc71",
+    color: "white",
+    fontWeight: "bold",
+  },
+};*/
+
+"use client";
+import { useState, useEffect } from "react";
+
+export default function Operator() {
+  const [buses, setBuses] = useState<any[]>([]);
+  const [name, setName] = useState("");
+  const [route, setRoute] = useState("");
+  const [totalSeats, setTotalSeats] = useState("");
+  const [availableSeats, setAvailableSeats] = useState("");
+  const [selectedBus, setSelectedBus] = useState<any>(null);
+  const [editIndex, setEditIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const data = localStorage.getItem("buses");
+    if (data) setBuses(JSON.parse(data));
   }, []);
 
   useEffect(() => {
@@ -60,177 +362,286 @@ export default function Operator() {
   }, [buses]);
 
   const addBus = () => {
-    if (!name || !route || !time || !fare || !totalSeats) {
-      alert("Please fill all fields");
+    if (!name || !route || !totalSeats || !availableSeats) {
+      alert("Fill all fields");
+      return;
+    }
+
+    if (Number(availableSeats) > Number(totalSeats)) {
+      alert("Available seats cannot exceed total seats ❌");
       return;
     }
 
     const newBus = {
       name,
       route,
-      time,
-      fare: Number(fare),
       totalSeats: Number(totalSeats),
-      availableSeats: Number(availableSeats || totalSeats),
+      availableSeats: Number(availableSeats),
     };
 
-    setBuses([...buses, newBus]);
+    if (editIndex !== null) {
+      const updated = [...buses];
+      updated[editIndex] = newBus;
+      setBuses(updated);
+      setEditIndex(null);
+      alert("Bus updated successfully ✅");
+    } else {
+      setBuses([...buses, newBus]);
+      alert("Bus added successfully ✅");
+    }
 
     setName("");
     setRoute("");
-    setTime("");
-    setFare("");
     setTotalSeats("");
     setAvailableSeats("");
   };
 
   const deleteBus = (index: number) => {
     setBuses(buses.filter((_, i) => i !== index));
-  };
-
-  const bookSeat = (index: number) => {
-    const updatedBuses = [...buses];
-
-    if (updatedBuses[index].availableSeats > 0) {
-      updatedBuses[index].availableSeats -= 1;
-      setBuses(updatedBuses);
-    } else {
-      alert("Bus is Full 🚫");
-    }
+    alert("Bus cancelled ❌");
   };
 
   return (
     <div style={styles.container}>
       <h1 style={styles.heading}>Operator Dashboard</h1>
 
-      {/* Inputs */}
+      {/* FORM */}
       <div style={styles.form}>
         <input style={styles.input} placeholder="Bus Name" value={name} onChange={(e) => setName(e.target.value)} />
         <input style={styles.input} placeholder="Route" value={route} onChange={(e) => setRoute(e.target.value)} />
-        <input style={styles.input} placeholder="Time" value={time} onChange={(e) => setTime(e.target.value)} />
-        <input style={styles.input} placeholder="Fare" value={fare} onChange={(e) => setFare(e.target.value)} />
         <input style={styles.input} placeholder="Total Seats" value={totalSeats} onChange={(e) => setTotalSeats(e.target.value)} />
         <input style={styles.input} placeholder="Available Seats" value={availableSeats} onChange={(e) => setAvailableSeats(e.target.value)} />
 
         <button style={styles.addBtn} onClick={addBus}>
-          Add Bus
+          {editIndex !== null ? "Update Bus" : "Add Bus"}
         </button>
       </div>
 
-      {/* Table */}
-      <h2>Bus List</h2>
+      {/* TABLE */}
+      <table style={styles.table}>
+        <thead>
+          <tr>
+            <th style={styles.th}>Name</th>
+            <th style={styles.th}>Route</th>
+            <th style={styles.th}>Total</th>
+            <th style={styles.th}>Available</th>
+            <th style={styles.th}>Actions</th>
+          </tr>
+        </thead>
 
-      {buses.length === 0 ? (
-        <p>No buses added</p>
-      ) : (
-        <table style={styles.table}>
-          <thead>
-            <tr>
-              <th style={styles.th}>Name</th>
-              <th style={styles.th}>Route</th>
-              <th style={styles.th}>Time</th>
-              <th style={styles.th}>Fare</th>
-              <th style={styles.th}>Total</th>
-              <th style={styles.th}>Available</th>
-              <th style={styles.th}>Actions</th>
+        <tbody>
+          {buses.map((bus, index) => (
+            <tr key={index} style={{ backgroundColor: editIndex === index ? "#334155" : "transparent" }}>
+              <td style={styles.td}>{bus.name}</td>
+              <td style={styles.td}>{bus.route}</td>
+              <td style={styles.td}>{bus.totalSeats}</td>
+
+              <td style={{
+                ...styles.td,
+                color: bus.availableSeats === 0 ? "#ff4d4f" : "#2ecc71",
+                fontWeight: "bold",
+              }}>
+                {bus.availableSeats === 0 ? "FULL" : bus.availableSeats}
+              </td>
+
+              <td style={styles.td}>
+                <button style={styles.editBtn} onClick={() => {
+                  setName(bus.name);
+                  setRoute(bus.route);
+                  setTotalSeats(bus.totalSeats.toString());
+                  setAvailableSeats(bus.availableSeats.toString());
+                  setEditIndex(index);
+                }}>
+                  Edit
+                </button>
+
+                <button style={styles.deleteBtn} onClick={() => deleteBus(index)}>
+                  Cancel
+                </button>
+
+                <button style={styles.viewBtn} onClick={() => setSelectedBus(bus)}>
+                  View
+                </button>
+              </td>
             </tr>
-          </thead>
+          ))}
+        </tbody>
+      </table>
 
-          <tbody>
-            {buses.map((bus, index) => (
-              <tr key={index}>
-                <td style={styles.td}>{bus.name}</td>
-                <td style={styles.td}>{bus.route}</td>
-                <td style={styles.td}>{bus.time}</td>
-                <td style={styles.td}>{bus.fare}</td>
-                <td style={styles.td}>{bus.totalSeats}</td>
-                <td style={styles.td}>
-                  {bus.availableSeats === 0 ? (
-                    <span style={styles.full}>Full</span>
-                  ) : (
-                    bus.availableSeats
-                  )}
-                </td>
-                <td style={styles.td}>
-                  
-                  <button style={styles.deleteBtn} onClick={() => deleteBus(index)}>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* SEAT VIEW */}
+      {selectedBus && (
+        <div style={styles.seatSection}>
+          <h2 style={styles.subheading}>
+            Seat Layout - {selectedBus.name}
+          </h2>
+
+          <div style={styles.busContainer}>
+            {Array.from({ length: 5 }).map((_, rowIndex) => {
+              const totalSeats = selectedBus.totalSeats;
+              const bookedCount = totalSeats - selectedBus.availableSeats;
+
+              const randomBooked = new Set<number>();
+              while (randomBooked.size < bookedCount) {
+                randomBooked.add(Math.floor(Math.random() * totalSeats));
+              }
+
+              return (
+                <div key={rowIndex} style={styles.row}>
+                  <div style={styles.side}>
+                    {[0, 1].map((seat) => {
+                      const seatNumber = rowIndex * 5 + seat;
+                      const isBooked = randomBooked.has(seatNumber);
+
+                      return (
+                        <div key={seatNumber} style={{
+                          ...styles.seat,
+                          backgroundColor: isBooked ? "#e74c3c" : "#bdc3c7"
+                        }}>
+                          {seatNumber + 1}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <div style={styles.aisle}></div>
+
+                  <div style={styles.side}>
+                    {[2, 3, 4].map((seat) => {
+                      const seatNumber = rowIndex * 5 + seat;
+                      const isBooked = randomBooked.has(seatNumber);
+
+                      return (
+                        <div key={seatNumber} style={{
+                          ...styles.seat,
+                          backgroundColor: isBooked ? "#e74c3c" : "#bdc3c7"
+                        }}>
+                          {seatNumber + 1}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* LEGEND */}
+          <div style={styles.legend}>
+            <div style={styles.legendItem}>
+              <span style={{ ...styles.box, background: "#e74c3c" }}></span>
+              Booked
+            </div>
+
+            <div style={styles.legendItem}>
+              <span style={{ ...styles.box, background: "#bdc3c7" }}></span>
+              Available
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
 }
 
-/* ✅ Styles */
+/* STYLES */
+
 const styles = {
   container: {
     padding: "20px",
-    backgroundColor: "#f4f7fb",
     minHeight: "100vh",
-    fontFamily: "Arial",
+    fontFamily: "Poppins, sans-serif",
+    background: "linear-gradient(135deg, #0f172a, #1e293b)",
+    color: "white",
   },
-  heading: {
-    textAlign: "center" as const,
-    color: "#2c3e50",
-  },
+
+  heading: { textAlign: "center", marginBottom: "20px" },
+
+  subheading: { textAlign: "center" },
+
   form: {
     display: "flex",
-    flexWrap: "wrap" as const,
     gap: "10px",
     justifyContent: "center",
-    margin: "20px 0",
+    marginBottom: "20px",
+    flexWrap: "wrap",
   },
-  input: {
-    padding: "8px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-  },
+
+  input: { padding: "10px", borderRadius: "6px", border: "1px solid #ccc" },
+
   addBtn: {
-    padding: "8px 15px",
-    backgroundColor: "#3498db",
+    background: "#3b82f6",
     color: "white",
+    padding: "10px 15px",
     border: "none",
-    borderRadius: "5px",
+    borderRadius: "6px",
     cursor: "pointer",
   },
+
   table: {
     width: "100%",
-    borderCollapse: "collapse" as const,
-    backgroundColor: "white",
+    borderCollapse: "collapse",
+    background: "#1e293b",
+    borderRadius: "10px",
   },
-  th: {
-    backgroundColor: "#3498db",
-    color: "white",
-    padding: "10px",
-  },
+
+  th: { background: "#334155", color: "#fff", padding: "12px" },
+
   td: {
-    padding: "10px",
-    textAlign: "center" as const,
-    borderBottom: "1px solid #ddd",
+    padding: "12px",
+    textAlign: "center",
+    borderBottom: "1px solid #334155",
+    color: "#e2e8f0",
   },
-  bookBtn: {
-    backgroundColor: "#27ae60",
+
+  editBtn: { background: "#f39c12", color: "white", padding: "6px", marginRight: "5px" },
+
+  deleteBtn: { background: "#e74c3c", color: "white", padding: "6px", marginRight: "5px" },
+
+  viewBtn: { background: "#8e44ad", color: "white", padding: "6px" },
+
+  seatSection: { marginTop: "30px" },
+
+  busContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "15px",
+  },
+
+  row: { display: "flex", alignItems: "center" },
+
+  side: { display: "flex", gap: "10px" },
+
+  aisle: { width: "40px" },
+
+  seat: {
+    width: "50px",
+    height: "50px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "8px",
     color: "white",
-    border: "none",
-    padding: "5px 10px",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-  deleteBtn: {
-    backgroundColor: "#e74c3c",
-    color: "white",
-    border: "none",
-    padding: "5px 10px",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-  full: {
-    color: "red",
     fontWeight: "bold",
   },
+
+  legend: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "20px",
+    marginTop: "20px",
+  },
+
+  legendItem: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+  },
+
+  box: {
+    width: "18px",
+    height: "18px",
+    borderRadius: "4px",
+  },
 };
+

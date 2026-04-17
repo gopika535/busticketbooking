@@ -22,7 +22,8 @@ export default function LoginPage() {
     }
 
     
-    else if (email === "operator@gmail.com" && password === "1234") {
+    
+    else if ((email === "operator@gmail.com" && password === "1234" )|| (email === "operator1@gmail.com" && password === "1234")) {
       localStorage.setItem("role", "operator");
       localStorage.setItem("user", JSON.stringify({ email }));
 
@@ -36,7 +37,7 @@ export default function LoginPage() {
       localStorage.setItem("user", JSON.stringify({ email }));
 
       alert("User Login Successful");
-      router.push("/");
+      router.push("/users");
     }
 
  
@@ -78,92 +79,7 @@ export default function LoginPage() {
       </form>
     </div>
   );
-}/*"use client";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-
-export default function LoginPage() {
-  const router = useRouter();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-
-  
-    if (email === "admin@gmail.com" && password === "1234") {
-      localStorage.setItem("user", JSON.stringify({ email }));
-
-      alert("Login successful!");
-      router.push("/admin"); 
-    } else {
-      alert("Invalid Email or Password");
-    }
-  };
-  const handleLogin = (e: React.FormEvent) => {
-  e.preventDefault();
-
-  if (email === "admin@gmail.com" && password === "1234") {
-    localStorage.setItem("role", "admin");
-    localStorage.setItem("user", JSON.stringify({ email }));
-
-    alert("Admin Login Successful");
-    router.push("/admin");
-  }
-
-  else if (email === "operator@gmail.com" && password === "1234") {
-    localStorage.setItem("role", "operator");
-    localStorage.setItem("user", JSON.stringify({ email }));
-
-    alert("Operator Login Successful");
-    router.push("/operator");
-  }
-  else if (email && password) {
-    localStorage.setItem("role", "user");
-    localStorage.setItem("user", JSON.stringify({ email }));
-
-    alert("User Login Successful");
-    router.push("/");
-  }
-  else {
-    alert("Invalid Email or Password");
-  }
-};
-
-  return (
-    <div style={styles.container}>
-     
-      <form onSubmit={handleLogin} style={styles.form}>
-        <label style={{ color: "black" }}>Email:</label>
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
-          required
-        />
-
-        <label style={{ color: "black" }}>Password :</label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
-          required
-        />
-
-        <button type="submit" style={styles.button}>
-          Login
-        </button>
-      </form>
-    </div>
-  );
-}*/
-
+}
 
 const styles = {
   container: {
@@ -171,7 +87,10 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f5f5f5",
+    backgroundImage: "url('/img.png')",
+    //filter: "blur(20px)",
+    backgroundSize: "cover",  
+    //backgroundPosition: "center",
   },
   form: {
     display: "flex",

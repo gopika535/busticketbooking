@@ -1,116 +1,5 @@
-/* Container */
+
 /*.buses-container {
-  padding: 50px 100px;
-  font-family: Arial, sans-serif;
-}
-
-.buses-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.buses-header h1 {
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.add-bus-btn {
-  padding: 8px 15px;
-  background-color: #22c55e;
-  color: white;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.add-bus-btn:hover {
-  background-color: #16a34a;
-}
-
-.buses-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.buses-table th,
-.buses-table td {
-  border: 1px solid #ccc;
-  padding: 12px 15px;
-  text-align: left;
-}
-
-.buses-table th {
-  background-color: #f3f4f6;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-}
-
-.edit-btn {
-  padding: 5px 10px;
-  background-color: #3b82f6;
-  color: white;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.edit-btn:hover {
-  background-color: #2563eb;
-}
-
-.delete-btn {
-  padding: 5px 10px;
-  background-color: #ef4444;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.delete-btn:hover {
-  background-color: #b91c1c;
-}*/
-
-/*.report-container {
-  margin-top: 40px;
-  padding: 20px;
-  background: #f5f7fa;
-  border-radius: 10px;
-}
-
-.report-btn {
-  padding: 10px 20px;
-  background: #0070f3;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
-
-.report-cards {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.card {
-  flex: 1;
-  min-width: 200px;
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}*/
-
-/* ===== PAGE BACKGROUND ===== */
-.buses-container {
   padding: 30px;
   min-height: 100vh;
   font-family: "Poppins", sans-serif;
@@ -118,7 +7,6 @@
   color: #fff;
 }
 
-/* ===== HEADER ===== */
 .buses-header {
   display: flex;
   justify-content: space-between;
@@ -144,7 +32,6 @@
   background: #2563eb;
 }
 
-/* ===== TABLE ===== */
 .buses-table {
   width: 100%;
   border-collapse: collapse;
@@ -170,7 +57,6 @@
   background: #273449;
 }
 
-/* ===== DELETE BUTTON ===== */
 .delete-btn {
   background: #ef4444;
   border: none;
@@ -185,7 +71,6 @@
   background: #dc2626;
 }
 
-/* ===== REPORT SECTION ===== */
 .report-container {
   margin-top: 30px;
 }
@@ -196,14 +81,12 @@
   font-weight: 500;
 }
 
-/* ===== CARD GRID ===== */
 .report-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
-/* ===== CARD STYLE (MATCH IMAGE) ===== */
 .card {
   display: flex;
   align-items: center;
@@ -217,12 +100,10 @@
   transition: 0.3s;
 }
 
-/* Hover effect */
 .card:hover {
   transform: translateY(-5px) scale(1.02);
 }
 
-/* ===== ICON STYLE ===== */
 .card::before {
   content: "📊";
   font-size: 28px;
@@ -231,7 +112,6 @@
   border-radius: 10px;
 }
 
-/* Different icons */
 .card:nth-child(2)::before {
   content: "💰";
 }
@@ -239,8 +119,6 @@
 .card:nth-child(3)::before {
   content: "🛣️";
 }
-
-/* ===== TEXT ===== */
 .card h3 {
   font-size: 16px;
   margin-bottom: 5px;
@@ -252,7 +130,6 @@
   font-weight: 600;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .report-cards {
     grid-template-columns: 1fr;
@@ -262,4 +139,94 @@
     flex-direction: column;
     gap: 10px;
   }
+}*/
+
+.buses-container {
+  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+}
+
+/* HEADER */
+.buses-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.add-bus-btn {
+  background: #3b82f6;
+  padding: 10px;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+}
+
+/* TABLE */
+.buses-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1e293b;
+  margin-bottom: 30px;
+}
+
+.buses-table th {
+  background: #334155;
+  padding: 12px;
+}
+
+.buses-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #334155;
+}
+
+.delete-btn {
+  background: red;
+  color: white;
+  padding: 6px;
+  border-radius: 5px;
+}
+
+/* REPORT */
+.report-container {
+  margin-top: 20px;
+}
+
+.report-cards {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.card {
+  flex: 1;
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* USER LIST */
+.user-list {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th {
+  background: #334155;
+  padding: 10px;
+}
+
+.user-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #334155;
 }

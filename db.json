@@ -70,11 +70,11 @@
       "seats": [
         {
           "number": 1,
-          "available": true
+          "available": false
         },
         {
           "number": 2,
-          "available": true
+          "available": false
         },
         {
           "number": 3,

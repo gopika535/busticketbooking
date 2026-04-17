@@ -28,7 +28,6 @@ export default function UserPage() {
   const [ticket, setTicket] = useState<any>(null);
   const [showBookingForm, setShowBookingForm] = useState(false);
 
-  /* FETCH ALL BUSES */
   useEffect(() => {
     fetchBuses();
   }, []);
@@ -42,13 +41,12 @@ export default function UserPage() {
     }
   };
 
-  /* BOOKED SEATS */
   const bookedSeats =
     selectedBus?.seats
       ?.filter((seat) => seat.available === false)
       .map((seat) => seat.number) || [];
 
-  /* SELECT SEAT */
+
   const toggleSeat = (seat: number) => {
     if (bookedSeats.includes(seat)) return;
 
@@ -59,7 +57,6 @@ export default function UserPage() {
     }
   };
 
-  /* OPEN BUS POPUP */
   const openBus = (bus: Bus) => {
     setSelectedBus(bus);
     setSelectedSeats([]);
@@ -69,7 +66,6 @@ export default function UserPage() {
     setShowBookingForm(false);
   };
 
-  /* OPEN FORM AFTER SEAT SELECT */
   const proceedBooking = () => {
     if (selectedSeats.length === 0) {
       alert("Please select seat first");
@@ -79,7 +75,6 @@ export default function UserPage() {
     setShowBookingForm(true);
   };
 
-  /* FINAL BOOKING */
   const bookTicket = async () => {
     if (!username || !phone || !email) {
       alert("Enter all details");
@@ -121,7 +116,6 @@ export default function UserPage() {
     }
   };
 
-  /* CANCEL */
   const cancelBooking = () => {
     setTicket(null);
     setSelectedSeats([]);
@@ -132,7 +126,6 @@ export default function UserPage() {
     <div style={styles.container}>
       <h1 style={styles.heading}>User Dashboard</h1>
 
-      {/* AVAILABLE BUSES */}
       <h2>Available Buses</h2>
 
       {buses.map((bus) => (
@@ -147,7 +140,6 @@ export default function UserPage() {
         </div>
       ))}
 
-      {/* BUS SEAT POPUP */}
       {selectedBus && (
         <div style={styles.popupOverlay}>
           <div style={styles.popup}>
@@ -165,13 +157,11 @@ export default function UserPage() {
             <p>{selectedBus.time}</p>
             <p>Fare: ₹{selectedBus.price}</p>
 
-            {/* SEATS */}
             <h3>Select Seats</h3>
 
             <div style={styles.busContainer}>
               {Array.from({ length: 5 }).map((_, rowIndex) => (
                 <div key={rowIndex} style={styles.row}>
-                  {/* LEFT */}
                   <div style={styles.side}>
                     {[0, 1].map((seat) => {
                       const seatNumber = rowIndex * 5 + seat + 1;
@@ -200,7 +190,6 @@ export default function UserPage() {
 
                   <div style={styles.aisle}></div>
 
-                  {/* RIGHT */}
                   <div style={styles.side}>
                     {[2, 3, 4].map((seat) => {
                       const seatNumber = rowIndex * 5 + seat + 1;
@@ -266,7 +255,6 @@ export default function UserPage() {
         </div>
       )}
 
-      {/* TICKET POPUP */}
       {ticket && (
         <div style={styles.popupOverlay}>
           <div style={styles.ticket}>
@@ -295,7 +283,6 @@ export default function UserPage() {
   );
 }
 
-/* STYLES */
 
 const styles = {
   container: {
@@ -428,3 +415,4 @@ const styles = {
     borderRadius: "5px",
   },
 };
+

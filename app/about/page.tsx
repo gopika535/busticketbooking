@@ -82,7 +82,7 @@ const styles = {
   },
 
   heading: {
-    textAlign: "center",
+    textAlign: "center" as const,
     fontSize: "32px",
     marginBottom: "20px",
   },
@@ -95,7 +95,7 @@ const styles = {
   text: {
     fontSize: "16px",
     marginBottom: "20px",
-    textAlign: "justify",
+    textAlign: "justify" as const,
   },
 
  

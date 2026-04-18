@@ -114,6 +114,11 @@ const styles = {
     color: "black",         
     backgroundColor: "white" 
   },
+  label: {
+    display: "block",
+    marginBottom: "8px",
+    fontWeight: "bold",
+  },
   button: {
     padding: "10px",
     backgroundColor: "#0070f3",

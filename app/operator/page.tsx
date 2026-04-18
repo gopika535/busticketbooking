@@ -221,8 +221,10 @@ const styles = {
     gap: "10px",
     justifyContent: "center",
     marginBottom: "20px",
-    flexWrap: "wrap",
+    flexWrap: "wrap" as const,
   },
+
+
 
   input: { padding: "10px", borderRadius: "6px", border: "1px solid #ccc" },
 

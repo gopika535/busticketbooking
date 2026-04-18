@@ -239,7 +239,7 @@ const styles = {
 
   table: {
     width: "100%",
-    borderCollapse: "collapse",
+    borderCollapse: "collapse" as const,
     background: "#1e293b",
     borderRadius: "10px",
   },

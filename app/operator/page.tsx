@@ -268,7 +268,7 @@ const styles = {
 
   busContainer: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column" as const,
     alignItems: "center",
     gap: "15px",
   },

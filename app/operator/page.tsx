@@ -212,9 +212,9 @@ const styles = {
     color: "white",
   },
 
-  heading: { textAlign: "center", marginBottom: "20px" },
+  heading: { textAlign: "center" as const, marginBottom: "20px" },
 
-  subheading: { textAlign: "center" },
+  subheading: { textAlign: "center" as const },
 
   form: {
     display: "flex",
@@ -241,12 +241,17 @@ const styles = {
     background: "#1e293b",
     borderRadius: "10px",
   },
+  label: {
+    display: "block",
+    marginBottom: "8px",
+    fontWeight: "bold",
+  },
 
   th: { background: "#334155", color: "#fff", padding: "12px" },
 
   td: {
     padding: "12px",
-    textAlign: "center",
+    textAlign: "center" as const,
     borderBottom: "1px solid #334155",
     color: "#e2e8f0",
   },
